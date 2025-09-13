@@ -3,12 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, LogOut, Eye, Edit, Filter, UserPlus, DollarSign, Edit2 } from "lucide-react";
+import { Search, LogOut, Eye, Edit, Filter, UserPlus, DollarSign, Edit2, Bell } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import MemberDetails from "./MemberDetails";
 import AddMemberModal from "./AddMemberModal";
 import FinancialDetailsModal from "./FinancialDetailsModal";
 import UpdateRequestModal from "./UpdateRequestModal";
+import PendingRequestsModal from "./PendingRequestsModal";
 
 interface Member {
   memberNo: string;
@@ -158,6 +159,7 @@ const MemberDashboard = ({ userRole, onLogout }: MemberDashboardProps) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showFinancialModal, setShowFinancialModal] = useState<Member | null>(null);
   const [showUpdateModal, setShowUpdateModal] = useState<Member | null>(null);
+  const [showPendingRequestsModal, setShowPendingRequestsModal] = useState(false);
   const [members, setMembers] = useState<Member[]>(mockMembers);
 
   const handleSearch = () => {
@@ -211,14 +213,26 @@ const MemberDashboard = ({ userRole, onLogout }: MemberDashboardProps) => {
                 Logged in as: {userRole.toUpperCase()}
               </p>
             </div>
-            <Button
-              onClick={onLogout}
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-gov-header"
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              Logout
-            </Button>
+            <div className="flex items-center gap-3">
+              {userRole === "head1" && (
+                <Button
+                  onClick={() => setShowPendingRequestsModal(true)}
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-gov-header"
+                >
+                  <Bell className="w-4 h-4 mr-2" />
+                  Pending Requests (2)
+                </Button>
+              )}
+              <Button
+                onClick={onLogout}
+                variant="outline"
+                className="border-white text-white hover:bg-white hover:text-gov-header"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -350,14 +364,21 @@ const MemberDashboard = ({ userRole, onLogout }: MemberDashboardProps) => {
                             <Eye className="w-4 h-4 mr-1" />
                             Extra Info
                           </Button>
-                          <Button
-                            size="sm"
-                            onClick={() => setShowUpdateModal(member)}
-                            className="bg-amber-600 hover:bg-amber-700 text-white"
-                          >
-                            <Edit2 className="w-4 h-4 mr-1" />
-                            Update
-                          </Button>
+                          {userRole === "admin1" && (
+                            <Button
+                              size="sm"
+                              onClick={() => setShowUpdateModal(member)}
+                              className="bg-amber-600 hover:bg-amber-700 text-white"
+                            >
+                              <Edit2 className="w-4 h-4 mr-1" />
+                              Update
+                            </Button>
+                          )}
+                          {userRole === "head1" && (
+                            <Badge variant="outline" className="px-2 py-1 text-xs">
+                              Updates via Approval Only
+                            </Badge>
+                          )}
                           <Button
                             size="sm"
                             onClick={() => setShowFinancialModal(member)}
@@ -397,10 +418,16 @@ const MemberDashboard = ({ userRole, onLogout }: MemberDashboardProps) => {
           />
         )}
 
-        {showUpdateModal && (
+        {showUpdateModal && userRole === "admin1" && (
           <UpdateRequestModal
             member={showUpdateModal}
             onClose={() => setShowUpdateModal(null)}
+          />
+        )}
+
+        {showPendingRequestsModal && userRole === "head1" && (
+          <PendingRequestsModal
+            onClose={() => setShowPendingRequestsModal(false)}
           />
         )}
       </div>

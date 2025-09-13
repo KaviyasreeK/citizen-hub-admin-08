@@ -68,7 +68,7 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
               />
             </div>
             
-            <div className="pt-4">
+            <div className="pt-4 space-y-3">
               <Button
                 onClick={() => handleLogin("admin1")}
                 className="w-full bg-gov-primary hover:bg-gov-primary-light text-white"
@@ -76,6 +76,15 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
               >
                 <User className="w-4 h-4 mr-2" />
                 Administrator Login
+              </Button>
+              
+              <Button
+                onClick={() => handleLogin("head1")}
+                className="w-full bg-gov-secondary hover:bg-orange-600 text-white"
+                disabled={!username || !password}
+              >
+                <Shield className="w-4 h-4 mr-2" />
+                Head1 Login
               </Button>
             </div>
             
