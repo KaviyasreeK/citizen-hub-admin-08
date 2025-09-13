@@ -3,11 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, LogOut, Eye, Edit, Filter, UserPlus, DollarSign } from "lucide-react";
+import { Search, LogOut, Eye, Edit, Filter, UserPlus, DollarSign, Edit2 } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import MemberDetails from "./MemberDetails";
 import AddMemberModal from "./AddMemberModal";
 import FinancialDetailsModal from "./FinancialDetailsModal";
+import UpdateRequestModal from "./UpdateRequestModal";
 
 interface Member {
   memberNo: string;
@@ -156,6 +157,7 @@ const MemberDashboard = ({ userRole, onLogout }: MemberDashboardProps) => {
   const [filteredMembers, setFilteredMembers] = useState<Member[]>(mockMembers);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showFinancialModal, setShowFinancialModal] = useState<Member | null>(null);
+  const [showUpdateModal, setShowUpdateModal] = useState<Member | null>(null);
   const [members, setMembers] = useState<Member[]>(mockMembers);
 
   const handleSearch = () => {
@@ -350,6 +352,14 @@ const MemberDashboard = ({ userRole, onLogout }: MemberDashboardProps) => {
                           </Button>
                           <Button
                             size="sm"
+                            onClick={() => setShowUpdateModal(member)}
+                            className="bg-amber-600 hover:bg-amber-700 text-white"
+                          >
+                            <Edit2 className="w-4 h-4 mr-1" />
+                            Update
+                          </Button>
+                          <Button
+                            size="sm"
                             onClick={() => setShowFinancialModal(member)}
                             className="bg-green-600 hover:bg-green-700 text-white"
                           >
@@ -384,6 +394,13 @@ const MemberDashboard = ({ userRole, onLogout }: MemberDashboardProps) => {
           <FinancialDetailsModal
             member={showFinancialModal}
             onClose={() => setShowFinancialModal(null)}
+          />
+        )}
+
+        {showUpdateModal && (
+          <UpdateRequestModal
+            member={showUpdateModal}
+            onClose={() => setShowUpdateModal(null)}
           />
         )}
       </div>
