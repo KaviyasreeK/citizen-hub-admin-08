@@ -26,7 +26,7 @@ const mockPendingRequests: PendingRequest[] = [
     id: "UPD-123456",
     memberNo: "001",
     memberName: "Rajesh Kumar",
-    requestedBy: "Administrator",
+    requestedBy: "User",
     requestDate: "2024-01-15",
     reason: "Member requested to update contact details due to change in phone number",
     changes: [
@@ -39,7 +39,7 @@ const mockPendingRequests: PendingRequest[] = [
     id: "UPD-789012",
     memberNo: "002",
     memberName: "Priya Sharma",
-    requestedBy: "Administrator",
+    requestedBy: "User",
     requestDate: "2024-01-14",
     reason: "Correction needed in payment amount after bank verification",
     changes: [

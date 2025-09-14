@@ -82,7 +82,7 @@ const UpdateRequestModal = ({ member, onClose }: UpdateRequestModalProps) => {
 
     toast({
       title: "Update Request Submitted",
-      description: `Request ID: ${requestId} has been sent to Head1 for approval. You will be notified once processed.`,
+      description: `Request ID: ${requestId} has been sent to administrator for approval. You will be notified once processed.`,
     });
 
     setIsSubmitting(false);
@@ -114,7 +114,7 @@ const UpdateRequestModal = ({ member, onClose }: UpdateRequestModalProps) => {
             </Button>
           </div>
           <p className="text-blue-200 text-sm">
-            Submit update request to Head1 for approval
+            Submit update request to administrator for approval
           </p>
         </CardHeader>
 
