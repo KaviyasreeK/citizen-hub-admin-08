@@ -245,7 +245,7 @@ const UpdateRequestModal = ({ member, onClose }: UpdateRequestModalProps) => {
               ) : (
                 <>
                   <Send className="w-4 h-4 mr-2" />
-                  Submit Request to Head1
+                  Submit Request to Administrator
                 </>
               )}
             </Button>
