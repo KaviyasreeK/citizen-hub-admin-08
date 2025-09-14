@@ -39,7 +39,7 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
       <div className="flex items-center justify-center py-16 px-4">
         <Card className="w-full max-w-md shadow-xl border-gov-border">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-gov-header">Administrator Login</CardTitle>
+            <CardTitle className="text-2xl text-gov-header">System Login</CardTitle>
             <CardDescription>
               Please select your role and enter credentials to access the system
             </CardDescription>
@@ -75,7 +75,7 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
                 disabled={!username || !password}
               >
                 <User className="w-4 h-4 mr-2" />
-                Administrator Login
+                User Login
               </Button>
               
               <Button
@@ -84,7 +84,7 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
                 disabled={!username || !password}
               >
                 <Shield className="w-4 h-4 mr-2" />
-                Head1 Login
+                Administrator Login
               </Button>
             </div>
             

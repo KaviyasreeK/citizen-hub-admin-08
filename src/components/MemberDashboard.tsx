@@ -210,7 +210,7 @@ const MemberDashboard = ({ userRole, onLogout }: MemberDashboardProps) => {
             <div>
               <h1 className="text-xl font-bold">Member Management System</h1>
               <p className="text-blue-200 text-sm">
-                Logged in as: {userRole.toUpperCase()}
+                Logged in as: {userRole === 'admin1' ? 'USER' : 'ADMINISTRATOR'}
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -294,14 +294,16 @@ const MemberDashboard = ({ userRole, onLogout }: MemberDashboardProps) => {
             </CardContent>
           </Card>
           
-          <Button
-            onClick={() => setShowAddModal(true)}
-            className="bg-gov-secondary hover:bg-orange-600 text-white"
-            size="lg"
-          >
-            <UserPlus className="w-5 h-5 mr-2" />
-            Add New Member
-          </Button>
+          {userRole === "admin1" && (
+            <Button
+              onClick={() => setShowAddModal(true)}
+              className="bg-gov-secondary hover:bg-orange-600 text-white"
+              size="lg"
+            >
+              <UserPlus className="w-5 h-5 mr-2" />
+              Add New Member
+            </Button>
+          )}
         </div>
 
         {/* Members Table */}
@@ -373,11 +375,6 @@ const MemberDashboard = ({ userRole, onLogout }: MemberDashboardProps) => {
                               <Edit2 className="w-4 h-4 mr-1" />
                               Update
                             </Button>
-                          )}
-                          {userRole === "head1" && (
-                            <Badge variant="outline" className="px-2 py-1 text-xs">
-                              Updates via Approval Only
-                            </Badge>
                           )}
                           <Button
                             size="sm"
